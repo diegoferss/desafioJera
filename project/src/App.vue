@@ -19,24 +19,32 @@ import HomeView from './views/HomeView.vue'
 </script>
 
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
+  @charset "UTF-8";
 
-nav {
-  padding: 30px;
-}
+  @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@200;300;400;500;600;700;800;900&display=swap');
 
-nav a {
-  font-weight: bold;
-  color: #2c3e50;
-}
+  /* box-sizing: border-box; */
 
-nav a.router-link-exact-active {
-  color: #42b983;
-}
+  * {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: var(--font);
+  }
+
+  :root {
+    --cor01: #15C3D6;
+    --cor02: #FFD666;
+    --cor03: #2E4A7D;
+    --cor04: #EBF2F5;
+    --cor05: #FFFFFF;
+    --cor06: #f3e9e9;
+    --cor07: #253e6d;
+    --cor08: rgb(46, 74, 125, 0.8);
+    --cor09: #3C5D95;
+
+    --font: 'Nunito', sans-serif;
+
+    font-size: 16px;
+  }
 </style>
