@@ -110,6 +110,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    text-decoration: none;
   }
 
   .home__item__text {
