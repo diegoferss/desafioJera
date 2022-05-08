@@ -4,17 +4,23 @@
   </nav>
   <router-view/>-->
   <div>
-    <HomeView />
+    <!--<HomeView />-->
+    <!--<AccountView />-->
+    <CreateAccountView />
   </div>
 </template>
 
 <script>
-import HomeView from './views/HomeView.vue'
+//import HomeView from './views/HomeView.vue'
+//import AccountView from './views/AccountView.vue'
+import CreateAccountView from './views/CreateAccountView.vue'
 
   export default {
     components: {
-      HomeView
-    }
+    //HomeView,
+    //createAccountView,
+    CreateAccountView
+}
   }
 </script>
 
