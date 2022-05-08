@@ -3,7 +3,7 @@
     <header class="createAccount__item">
       <div class="createAccount__item__wrapper">
         <h1 class="createAccount__item__wrapper__title">NETFLIX</h1>
-        <button class="createAccount__item__wrapper__login">Entrar</button>
+        <router-link to="/login" class="createAccount__item__wrapper__login">Entrar</router-link>
       </div>
     </header>
 
@@ -12,11 +12,12 @@
       <p class="creatAccount__item__text creatAccount__item__text--information">Preencha os dados abaixo!</p>
       <p class="creatAccount__item__text creatAccount__item__text--information">Eu não sei mais o que fazer</p>
       <section class="createAccount__item__questions">
-        <input class="createAccount__item__questions__button" type="text" placeholder="Nome de usuário">
-        <input class="createAccount__item__questions__button" type="email" placeholder="Email">
-        <input class="createAccount__item__questions__button" type="password" placeholder="Senha">
-        <input type="date" class="createAccount__item__questions__button" placeholder="Data de nascimento">
-        <button class="createAccount__item__questions__button createAccount__item__questions__button--send">Finalizar</button>
+        <input class="createAccount__item__questions__button" type="text" placeholder="Nome de usuário" v-model="username">
+        <input class="createAccount__item__questions__button" type="email" placeholder="Email" v-model="email">
+        <input class="createAccount__item__questions__button" type="password" placeholder="Senha" v-model="password">
+        <input type="date" class="createAccount__item__questions__button" placeholder="Data de nascimento" v-model="date">
+        <button class="createAccount__item__questions__button createAccount__item__questions__button--send"
+          @click="sendForm()" >Finalizar</button>
       </section>
     </main>
   </div>
@@ -24,7 +25,56 @@
 
 <script>
   export default {
-
+    data() {
+      return {
+        email: '',
+        password: '',
+        username: '',
+        date: ''
+      }
+    },
+    computed: {
+      account() {
+        return {
+          email: this.email,
+          password: this.password,
+          usernane: this.username,
+          date: this.date
+        }
+      }
+    },
+    methods: {
+      async sendForm() {
+        const checkIsEmpty = this.checkFormIsEmpty()
+        const res = await this.$http.get('usuarios.json')
+        const users = await res.data
+        let checkEmail = true
+        for (let user in users) {
+          if(users[user].email == this.email) {
+            checkEmail = false
+            break
+          }
+        }
+        if(!checkIsEmpty || !checkEmail) {
+          console.log('err')
+        }
+        else this.$http.post(`usuarios.json`, this.account)
+      },
+      checkFormIsEmpty() {
+        let boolCheck = true
+        const items = this.account
+        for (let item in items) {
+          if(items[item]=='') {
+            boolCheck = false
+            break
+          }
+        }
+        return boolCheck
+      },
+      checkEmail() {
+        
+      }
+    }
   }
 </script>
 
@@ -78,6 +128,8 @@
     font-weight: 700;
     font-size: 1.2rem;
     margin-right: 10px;
+    color: black;
+    text-decoration: none;
   }
 
   .creatAccount__item__text {

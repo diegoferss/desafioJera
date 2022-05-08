@@ -7,10 +7,10 @@
     <main class="login__item login__item--account">
       <p class="login__item__text">Entrar</p>
       <div class="login__item__wrapper">
-        <input type="email" class="login__item__wrapper__button" placeholder="Email">
-        <input type="password" class="login__item__wrapper__button" placeholder="Senha">
+        <input type="email" class="login__item__wrapper__button" placeholder="Email" v-model="email">
+        <input type="password" class="login__item__wrapper__button" placeholder="Senha" v-model="password">
       </div>
-      <button class="login__item__entry">Entrar</button>
+      <button class="login__item__entry" @click="tryLogin()">Entrar</button>
       <p class="login__item__text login__item__text--create">Novo por aqui?
         <router-link to="/register" class="login__item__text__link">Crie a sua conta aqui!</router-link>
       </p>
@@ -20,7 +20,26 @@
 
 <script>
   export default {
-
+    data() {
+      return {
+        email: '',
+        password: ''
+      }
+    },
+    computed: {
+      account() {
+        return {
+          email: this.email,
+          password: this.password
+        }
+      }
+    },
+    methods: {
+      tryLogin() {
+        const items = this.account
+        console.log(items)
+      }
+    }
   }
 </script>
 
@@ -31,7 +50,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    background: rgba(205, 205, 255, 0.7);
+    background: #000000BF;
   }
 
   .login__item {
@@ -58,7 +77,7 @@
   }
 
   .login__item--account {
-    background-color: rgba(0, 0, 0, 0.9);
+    background-color: #000000BF;
     display: flex;
     flex-direction: column;
     align-items: center;
