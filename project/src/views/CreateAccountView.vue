@@ -42,8 +42,8 @@
   }
 
   .createAccount__item {
-      width: 100%;
-      border-bottom: 1px solid rgba(128, 128, 128, 0.1);
+    width: 100%;
+    border-bottom: 1px solid rgba(128, 128, 128, 0.1);
   }
 
   .createAccount__item--form {

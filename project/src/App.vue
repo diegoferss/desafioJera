@@ -1,26 +1,16 @@
 <template>
   <!--nav>
     <router-link to="/">Home</router-link> |
-  </nav>
-  <router-view/>-->
-  <div>
-    <!--<HomeView />-->
-    <!--<AccountView />-->
-    <CreateAccountView />
-  </div>
+  </nav>-->
+  <router-view/>
 </template>
 
 <script>
-//import HomeView from './views/HomeView.vue'
-//import AccountView from './views/AccountView.vue'
-import CreateAccountView from './views/CreateAccountView.vue'
 
   export default {
     components: {
-    //HomeView,
-    //createAccountView,
-    CreateAccountView
-}
+    
+    }
   }
 </script>
 

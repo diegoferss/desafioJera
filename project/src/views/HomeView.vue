@@ -4,7 +4,7 @@
       <h1 class="home__item__title">NETFLIX</h1>
       <div class="home__item__config">
         <button class="home__item__config__button home__item__config__button--language">Português</button>
-        <button class="home__item__config__button home__item__config__button--login">Entrar</button>
+        <router-link to="/login" class="home__item__config__button home__item__config__button--login">Entrar</router-link>
       </div>
     </header>
 
@@ -14,7 +14,7 @@
       <p class="home__item__text home__item__text--bottom">Pronto para assistir? Informe o seu email para criar ou reiniciar a sua conta.</p>
       <div class="home__item__verify">
         <input class="home__item__verify__item home__item__verify__email" type="email" name="" id="" value="diegoferss.2019@gmail.com">
-        <button class="home__item__verify__item home__item__verify__started">Vamos lá ></button>
+        <router-link to="/register" class="home__item__verify__item home__item__verify__started">Vamos lá ></router-link>
       </div>
     </main>
 
@@ -93,6 +93,10 @@
     border-radius: 4px;
   }
 
+  .home__item__config__button:hover {
+    cursor: pointer;
+  }
+
   .home__item__config__button--language {
     border: 1px solid white;
     height: 42px;
@@ -103,6 +107,9 @@
     background: red;
     height: 34px;
     padding: 0 16px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 
   .home__item__text {
@@ -158,5 +165,6 @@
     font-weight: 600;
     align-items: center;
     padding: 15px 20px;
+    text-decoration: none;
   }
 </style>
