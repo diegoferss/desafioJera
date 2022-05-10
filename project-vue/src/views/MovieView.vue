@@ -61,7 +61,7 @@
       }
     },
     created() {
-      this.$http.get('https://api.themoviedb.org/3/discover/movie?api_key=2ff39883ff80b10c14dfb78fe5a121ba&language=en-US&sort_by=popularity.desc&include_adult=true&include_video=false&page=1&with_watch_monetization_types=flatrate')
+      this.$http.get('https://api.themoviedb.org/3/discover/movie?api_key=2ff39883ff80b10c14dfb78fe5a121ba&language=en-US&sort_by=popularity.desc&include_adult=true&include_video=true&page=1&with_watch_monetization_types=flatrate')
         .then(res => res.data)
         .then(data => data.results)
         .then(results => { 

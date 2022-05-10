@@ -1,6 +1,7 @@
 <template>
-  <div id="movie">
-    <img :src="imagePath" class="movie__image">
+  <div id="movie" @mouseover="mouseAbove = true">
+    <img v-if="!mouseAbove" :src="imagePath" class="movie__image">
+    <p v-else @mouseleave="mouseAbove = false">{{ description }}</p>
   </div>
 </template>
 
@@ -11,12 +12,17 @@
     },
     data() {
       return {
-        basisURL: 'https://image.tmdb.org/t/p/original/'
+        basisURL: 'https://image.tmdb.org/t/p/original/',
+        mouseAbove: false
       }
     },
     computed: {
       imagePath() {
+        console.log(this.values)
         return this.basisURL + this.values.poster_path
+      },
+      description() {
+        return this.values.overview
       }
     }
   }
