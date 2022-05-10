@@ -2,7 +2,9 @@
   <div id="createAccount">
     <header class="createAccount__item">
       <div class="createAccount__item__wrapper">
-        <h1 class="createAccount__item__wrapper__title">NETFLIX</h1>
+        <h1 class="createAccount__item__wrapper__title">
+          <router-link to="/" class="createAccount__item__wrapper__title__text">NETFLIX</router-link>
+        </h1>
         <router-link to="/login" class="createAccount__item__wrapper__login">Entrar</router-link>
       </div>
     </header>
@@ -15,7 +17,7 @@
         <input class="createAccount__item__questions__button" type="text" placeholder="Nome de usuário" v-model="username">
         <input class="createAccount__item__questions__button" type="email" placeholder="Email" v-model="email">
         <input class="createAccount__item__questions__button" type="password" placeholder="Senha" v-model="password">
-        <input type="date" class="createAccount__item__questions__button" placeholder="Data de nascimento" v-model="date">
+        <input type="date" class="createAccount__item__questions__button" v-model="date">
         <button class="createAccount__item__questions__button createAccount__item__questions__button--send"
           @click="sendForm()" >Finalizar</button>
       </section>
@@ -80,11 +82,13 @@
 
 <style scoped>
   #createAccount {
-      height: 100vh;
-      width: 100vw;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: rgb(195, 142, 153);
+    /*background: white;*/
   }
 
   button:hover {
@@ -101,7 +105,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-top: 30px;
+    margin-top: 10px;
     max-width: 450px;
   }
 
@@ -116,10 +120,15 @@
   }
 
   .createAccount__item__wrapper__title {
-    color: red;
     font-weight: 800;
     font-size: 3.2rem;
     margin-left: 10px;
+  }
+
+  .createAccount__item__wrapper__title__text {
+    /*color: red;*/
+    color: white;
+    text-decoration: none;
   }
 
   .createAccount__item__wrapper__login {
@@ -128,14 +137,16 @@
     font-weight: 700;
     font-size: 1.2rem;
     margin-right: 10px;
-    color: black;
+    /*color: black;*/
+    color: white;
     text-decoration: none;
   }
 
   .creatAccount__item__text {
     font-size: 1.8rem;
     font-weight: 700;
-    color: rgb(20, 20, 20);
+    /*color: rgb(20, 20, 20);*/
+    color: rgb(245, 245, 245);
     align-self: flex-start;
     margin-bottom: 10px;
   }
@@ -153,16 +164,24 @@
 
   .createAccount__item__questions__button {
     width: 100%;
-    border: 1px solid gray;
+    border: 3px solid white;
     outline: none;
+    border-radius: 20px;
     font-size: 1.1rem;
     padding: 18px 10px;
     margin-bottom: 10px;
+    background: transparent;
+  }
+
+  ::placeholder {
+    color: white;
   }
 
   .createAccount__item__questions__button--send {
-    background-color: red;
-    color: white;
+    /*background-color: red;*/
+    background: white;
+    /*color: white;*/
+    color: hsl(348, 31%, 40%);
     border: none;
     font-size: 1.5rem;
     font-weight: 700;

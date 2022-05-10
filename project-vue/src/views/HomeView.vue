@@ -13,7 +13,7 @@
       <p class="home__item__text home__item__text--middle">Assista onde quiser. Cancele quando quiser.</p>
       <p class="home__item__text home__item__text--bottom">Pronto para assistir? Informe o seu email para criar ou reiniciar a sua conta.</p>
       <div class="home__item__verify">
-        <input class="home__item__verify__item home__item__verify__email" type="email" name="" id="" value="diegoferss.2019@gmail.com">
+        <input class="home__item__verify__item home__item__verify__email" type="email" placeholder="Email">
         <router-link to="/register" class="home__item__verify__item home__item__verify__started">Vamos lá ></router-link>
       </div>
     </main>
@@ -72,7 +72,7 @@
   }
 
   .home__item__title {
-    color: red;
+    color: white;
     font-weight: 800;
     font-size: 2.5rem;
   }
@@ -104,13 +104,14 @@
   }
 
   .home__item__config__button--login {
-    background: red;
+    background: white;
     height: 34px;
     padding: 0 16px;
     display: flex;
     justify-content: center;
     align-items: center;
     text-decoration: none;
+    color: hsl(348, 31%, 40%);
   }
 
   .home__item__text {
@@ -148,24 +149,36 @@
     font-size: 1.5rem;
     color: white;
     outline: none;
-    border: 0.5px solid rgba(0, 0, 0, 0.7);
+    border: 3px solid white;
     height: 100%;
+    background-color: transparent;
   }
 
   .home__item__verify__email {
     flex: 3;
-    color: gray;
+    color: white;
     font-size: 1rem;
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+  }
+
+  ::placeholder {
+    color: white;
+    padding-left: 10px;
   }
 
   .home__item__verify__started {
     flex: 1;
-    background-color: red;
+    background-color: white;
     display: flex;
     justify-content: center;
     font-weight: 600;
     align-items: center;
     padding: 15px 20px;
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+    border-left: 0;
     text-decoration: none;
+    color: hsl(348, 31%, 40%);
   }
 </style>

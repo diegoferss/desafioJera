@@ -1,7 +1,9 @@
 <template>
     <div id="account">
         <header class="account__item">
-            <h1 class="account__item__title">NETFLIX</h1>
+            <h1 class="account__item__title">
+                <router-link to="/" class="account__item__title__text">NETFLIX</router-link>
+            </h1>
         </header>
 
         <main class="account__item account__item--profiles">
@@ -53,10 +55,18 @@
     }
 
     .account__item__title {
-        color: red;
         font-weight: 800;
         font-size: 2.5rem;
         text-shadow: 1px 1px 10px rgba(0, 0, 0, 1);
+    }
+
+    .account__item__title__text {
+        text-decoration: none;
+        color: red;
+    }
+
+    .account__item__title__text:hover {
+        cursor: pointer;
     }
 
     .account__item--profiles {
