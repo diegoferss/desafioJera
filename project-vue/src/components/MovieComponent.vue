@@ -1,12 +1,24 @@
 <template>
   <div id="movie">
-    <img src="https://turnmundonerd.com.br/wp-content/uploads/2022/02/Uncharted-668430180-large.jpg" class="movie__image">
+    <img :src="imagePath" class="movie__image">
   </div>
 </template>
 
 <script>
   export default {
-
+    props: {
+      values: Object
+    },
+    data() {
+      return {
+        basisURL: 'https://image.tmdb.org/t/p/original/'
+      }
+    },
+    computed: {
+      imagePath() {
+        return this.basisURL + this.values.poster_path
+      }
+    }
   }
 </script>
 

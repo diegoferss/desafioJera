@@ -6,7 +6,7 @@
         <img class="movies__item__searchBar__image" src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/55/Magnifying_glass_icon.svg/1200px-Magnifying_glass_icon.svg.png" alt=""
           @click="active()">
         <input class="movies__item__searchBar__search" :class="{'movies__item__searchBar__search--clicked': clicked}" type="text"
-          @click="active()">
+          @click="active()" @input="startingFetch">
       </button>
       <div class="movies__item__user">
         <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/55/Magnifying_glass_icon.svg/1200px-Magnifying_glass_icon.svg.png" alt="" class="movies__item__user__profile">
@@ -17,19 +17,7 @@
       <div class="movies__item__category">
         <p class="movies__item__category__type">Seus filmes</p>
         <div class="movies__item__category__movie">
-          <Movie />
-          <Movie />
-          <Movie />
-          <Movie />
-        </div>
-      </div>
-      <div class="movies__item__category">
-        <p class="movies__item__category__type">Seus filmes</p>
-        <div class="movies__item__category__movie">
-          <Movie />
-          <Movie />
-          <Movie />
-          <Movie />
+          <Movie v-for="el in fetchMovies" :key="el.id" :values="el" />
         </div>
       </div>
     </main>
@@ -45,7 +33,10 @@
         API_KEY: '2ff39883ff80b10c14dfb78fe5a121ba',
         BASEURL: 'https://api.themoviedb.org/3',
         SEARCH: '/genre/movie/list?api_key=',
-        clicked: false
+        clicked: false,
+        movies: '',
+        fetchMovies: '',
+        fetch: ''
       }
     },
     computed: {
@@ -59,19 +50,31 @@
     methods: {
       active() {
         this.clicked = !this.clicked
+      },
+      startingFetch(event) {
+        const fetch = event.target.value.toLowerCase()
+        this.fetchMovies = []
+        for (let item in this.movies) {
+          if(this.movies[item].title.toLowerCase().includes(fetch))
+            this.fetchMovies.push(this.movies[item])
+        }
       }
     },
     created() {
-      this.$http.get(this.URL + '&language=en-US')
+      this.$http.get('https://api.themoviedb.org/3/discover/movie?api_key=2ff39883ff80b10c14dfb78fe5a121ba&language=en-US&sort_by=popularity.desc&include_adult=true&include_video=false&page=1&with_watch_monetization_types=flatrate')
         .then(res => res.data)
-        .then(data => console.log(data))
+        .then(data => data.results)
+        .then(results => { 
+          this.movies = results
+          this.fetchMovies = results
+        })
     }
   }
 </script>
 
 <style scoped>
   #movies {
-    height: 100vh;
+    min-height: 100vh;
     width: 100vw;
     background: #000000BF;
   }
@@ -157,6 +160,7 @@
 
   .movies__item__category__movie {
     display: flex;
+    flex-wrap: wrap;
     margin-top: 8px;
     background: red;
   }
