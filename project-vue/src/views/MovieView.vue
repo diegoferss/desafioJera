@@ -6,7 +6,7 @@
         <img class="movies__item__searchBar__image" src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/55/Magnifying_glass_icon.svg/1200px-Magnifying_glass_icon.svg.png" alt=""
           @click="active()">
         <input class="movies__item__searchBar__search" :class="{'movies__item__searchBar__search--clicked': clicked}" type="text"
-          @click="active()" @input="startingFetch">
+          @click="active()" @input="startingFetch" v-model="fetch">
       </button>
       <div class="movies__item__user">
         <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/55/Magnifying_glass_icon.svg/1200px-Magnifying_glass_icon.svg.png" alt="" class="movies__item__user__profile">
@@ -14,18 +14,36 @@
     </header>
 
     <main class="movies__item movies__item--gender">
-      <div class="movies__item__category">
+      <div v-if="!amIFetching" class="movies__item__category">
         <p class="movies__item__category__type">Seus filmes</p>
         <div class="movies__item__category__movie">
-          <Movie v-for="el in fetchMovies" :key="el.id" :values="el" />
+          <Movie v-for="el in movieList" :key="el.id" :values="el" />
         </div>
       </div>
+      <template v-if="amIFetching">
+        <div class="movies__item__category">
+          <p class="movies__item__category__type">{{ fetch }}</p>
+          <div class="movies__item__category__movie">
+            <Movie v-for="el in fetchMovies" :key="el.id" :values="el" />
+          </div>
+        </div>
+      </template>
+      <template v-else>
+        <div class="movies__item__category" v-for="(el, index) in genres_ids" :key="index">
+          <p class="movies__item__category__type">{{ genres[index] }}</p>
+          <div class="movies__item__category__movie">
+            <span v-for="movie in movies" :key="movie.id">
+              <Movie :values="movie" v-if="movie.genre_ids.includes(el)"/>
+            </span>
+          </div>
+        </div>
+      </template>
     </main>
   </div>
 </template>
 
 <script>
-  import Movie from '../components/MovieComponent.vue'
+import Movie from '../components/MovieComponent.vue'
 
   export default {
     data() {
@@ -36,12 +54,18 @@
         clicked: false,
         movies: '',
         fetchMovies: '',
-        fetch: ''
+        fetch: '',
+        genres: [],
+        genres_ids: [],
+        amIFetching: false
       }
     },
     computed: {
       URL() {
         return this.BASEURL + this.SEARCH + this.API_KEY
+      },
+      movieList() {
+        return this.$store.state.list
       }
     },
     components: {
@@ -52,12 +76,19 @@
         this.clicked = !this.clicked
       },
       startingFetch(event) {
+        if(event.target.value=='')
+          this.amIFetching = false
+        else this.amIFetching = true
         const fetch = event.target.value.toLowerCase()
+        const string = fetch.split(' ').join('+')
         this.fetchMovies = []
-        for (let item in this.movies) {
+        /*for (let item in this.movies) {
           if(this.movies[item].title.toLowerCase().includes(fetch))
             this.fetchMovies.push(this.movies[item])
-        }
+        }*/
+        this.$http.get('https://api.themoviedb.org/3/search/movie?api_key=2ff39883ff80b10c14dfb78fe5a121ba&query=' + string)
+          .then(res => res.data.results)
+          .then(data => this.fetchMovies = data)
       }
     },
     created() {
@@ -67,6 +98,26 @@
         .then(results => { 
           this.movies = results
           this.fetchMovies = results
+          let ids
+          for (let item in results) {
+            ids = results[item].genre_ids
+            ids.forEach(id => {
+              if(!this.genres.includes(id)) 
+                this.genres.push(id)
+            })
+          }
+          this.genres_ids = this.genres
+          this.$http.get('https://api.themoviedb.org/3/genre/movie/list?api_key=2ff39883ff80b10c14dfb78fe5a121ba&language=en-US')
+            .then(res => res.data.genres)
+            .then(data => {
+              this.genres = this.genres.map(id => {
+                for (let genre in data) {
+                  if(data[genre].id==id) {
+                    return data[genre].name
+                  }
+                }
+              })
+            })
         })
     }
   }
@@ -162,6 +213,5 @@
     display: flex;
     flex-wrap: wrap;
     margin-top: 8px;
-    background: red;
   }
 </style>
