@@ -12,7 +12,10 @@
     </template>
     <div class="movie__description" v-else>
       <p class="movie__description__text">{{ values.overview }}</p>
-      <button class="movie__description__add" @click="addToList">{{ label }}</button>
+      <div class="movie__description__buttons">
+        <button class="movie__description__buttons__button" @click="addToList">{{ label }}</button>
+        <button v-if="this.myMovie" class="movie__description__buttons__button" @click="addToList">Assistido</button>
+      </div>
     </div>
   </div>
 </template>
@@ -20,7 +23,8 @@
 <script>
   export default {
     props: {
-      values: Object
+      values: Object,
+      myMovie: Boolean
     },
     data() {
       return {
@@ -80,7 +84,6 @@
     width: 300px;
     height: 150px;
     position: relative;
-    background: red;
   }
 
   .movie__image {
@@ -121,7 +124,13 @@
     text-align: justify;
   }
 
-  .movie__description__add {
+  .movie__description__buttons {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .movie__description__buttons__button {
     background: transparent;
     box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.2);
     color: white;
@@ -133,9 +142,10 @@
     padding: 5px 10px;
     border-radius: 10px;
     text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.2);
+    margin-bottom: 4px;
   }
 
-  .movie__description__add:hover {
+  .movie__description__buttons__button:hover {
     cursor: pointer;
   }
 </style>

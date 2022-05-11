@@ -17,7 +17,7 @@
       <div v-if="!amIFetching" class="movies__item__category">
         <p class="movies__item__category__type">Seus filmes</p>
         <div class="movies__item__category__movie">
-          <Movie v-for="el in movieList" :key="el.id" :values="el" />
+          <Movie v-for="el in movieList" :key="el.id" :values="el" :myMovie="true" />
         </div>
       </div>
       <template v-if="amIFetching">
