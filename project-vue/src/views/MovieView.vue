@@ -20,6 +20,14 @@
           <Movie v-for="el in movieList" :key="el.id" :values="el" :myMovie="true" />
         </div>
       </div>
+
+      <div v-if="haveWatchedMovies" class="movies__item__category">
+        <p class="movies__item__category__type">Assistidos</p>
+        <div class="movies__item__category__movie">
+          <Movie v-for="el in watchedMovies" :key="el.id" :values="el"/>
+        </div>
+      </div>
+
       <template v-if="amIFetching">
         <div class="movies__item__category">
           <p class="movies__item__category__type">{{ fetch }}</p>
@@ -52,7 +60,7 @@ import Movie from '../components/MovieComponent.vue'
         BASEURL: 'https://api.themoviedb.org/3',
         SEARCH: '/genre/movie/list?api_key=',
         clicked: false,
-        movies: '',
+        //movies: '',
         fetchMovies: '',
         fetch: '',
         genres: [],
@@ -66,6 +74,15 @@ import Movie from '../components/MovieComponent.vue'
       },
       movieList() {
         return this.$store.state.list
+      },
+      watchedMovies() {
+        return this.$store.state.watchedMovies
+      },
+      movies() {
+        return this.$store.state.allMovies
+      },
+      haveWatchedMovies() {
+        return this.watchedMovies.length > 0
       }
     },
     components: {
@@ -96,7 +113,8 @@ import Movie from '../components/MovieComponent.vue'
         .then(res => res.data)
         .then(data => data.results)
         .then(results => { 
-          this.movies = results
+          //this.movies = results
+          this.$store.state.allMovies = results
           this.fetchMovies = results
           let ids
           for (let item in results) {

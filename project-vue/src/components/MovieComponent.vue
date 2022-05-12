@@ -14,7 +14,7 @@
       <p class="movie__description__text">{{ values.overview }}</p>
       <div class="movie__description__buttons">
         <button class="movie__description__buttons__button" @click="addToList">{{ label }}</button>
-        <button v-if="this.myMovie" class="movie__description__buttons__button" @click="addToList">Assistido</button>
+        <button v-if="this.myMovie" class="movie__description__buttons__button" @click="watched">Assistido</button>
       </div>
     </div>
   </div>
@@ -50,8 +50,9 @@
       addToList() {
         let actualList = this.$store.state.list
         if(this.label == 'Adicionar na lista') {
-          if(!actualList.includes(this.values))
+          if(!actualList.includes(this.values)) {
             this.$store.state.list.push(this.values)
+          }
         }else {
           actualList = actualList.filter(el => {
             if(el != this.values)
@@ -59,6 +60,23 @@
           }) 
           this.$store.state.list = actualList
         }
+      },
+      watched() {
+        this.$store.state.watchedMovies.push(this.values)
+        let allMoviesList = this.$store.state.allMovies
+        let myMovies = this.$store.state.list
+        allMoviesList = allMoviesList.filter(el => {
+            if(el != this.values)
+              return true
+          }) 
+        this.$store.state.allMovies = allMoviesList
+
+        myMovies = myMovies.filter(el => {
+            if(el != this.values)
+              return true
+          }) 
+        this.$store.state.list = myMovies
+
       }
     }
   }

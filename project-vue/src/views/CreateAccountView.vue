@@ -60,7 +60,10 @@
         if(!checkIsEmpty || !checkEmail) {
           console.log('err')
         }
-        else this.$http.post(`usuarios.json`, this.account)
+        else { 
+          this.$store.state.profiles.push(this.account.username)
+          this.$http.post(`usuarios.json`, this.account)
+        }
       },
       checkFormIsEmpty() {
         let boolCheck = true

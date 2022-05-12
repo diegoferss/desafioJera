@@ -5,7 +5,10 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    list: []
+    list: [],
+    watchedMovies: [],
+    allMovies: [],
+    profiles: []
   },
   getters: {
   },
