@@ -40,7 +40,7 @@
         return {
           email: this.email,
           password: this.password,
-          usernane: this.username,
+          username: this.username,
           date: this.date
         }
       }
@@ -61,7 +61,6 @@
           console.log('err')
         }
         else { 
-          this.$store.state.profiles.push(this.account.username)
           this.$http.post(`usuarios.json`, this.account)
         }
       },

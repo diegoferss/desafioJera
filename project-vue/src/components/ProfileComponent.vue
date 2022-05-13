@@ -2,13 +2,15 @@
   <div id="profile">
     <!--<img src="" alt="" class="profile__profileImage">-->
     <div class="profile__profileImage"></div>
-    <p class="profile__profileName">Diego</p>
+    <p class="profile__profileName">{{ username }}</p>
   </div>
 </template>
 
 <script>
   export default {
-
+    props: {
+      username: String
+    }
   }
 </script>
 

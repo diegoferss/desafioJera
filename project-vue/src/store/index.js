@@ -8,7 +8,8 @@ export default new Vuex.Store({
     list: [],
     watchedMovies: [],
     allMovies: [],
-    profiles: []
+    profile: '',
+    logado: false
   },
   getters: {
   },

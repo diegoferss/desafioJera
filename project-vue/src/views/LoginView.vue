@@ -12,7 +12,9 @@
         <input type="email" class="login__item__wrapper__button" placeholder="Email" v-model="email">
         <input type="password" class="login__item__wrapper__button" placeholder="Senha" v-model="password">
       </div>
-      <button class="login__item__entry" @click="tryLogin()">Entrar</button>
+      <button class="login__item__entry" @click="tryLogin()">
+        Entrar
+      </button>
       <p class="login__item__text login__item__text--create">Novo por aqui?
         <router-link to="/register" class="login__item__text__link">Crie a sua conta aqui!</router-link>
       </p>
@@ -42,13 +44,22 @@
         const res = await this.$http.get('usuarios.json')
         const users = await res.data
         let accountExist = false
+        let accountLogged = ''
         for (let user in users) {
           if(users[user].email == email && users[user].password == password) {
             accountExist = true
+            accountLogged = users[user]
             break
           }
         }
-        console.log(accountExist)
+        if(accountExist) {
+          this.$store.state.profile = accountLogged
+          this.$store.state.logado = true
+          this.$router.push('/profiles')
+        }else {
+          this.$store.state.profile = ''
+          this.$store.state.logado = false
+        }
       }
     }
   }

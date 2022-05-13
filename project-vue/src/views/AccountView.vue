@@ -9,11 +9,7 @@
         <main class="account__item account__item--profiles">
             <p class="account__item__watching">Quem está assistindo?</p>
             <div class="account__item__profiles">
-                <ProfileComponent />
-                <ProfileComponent />
-                <ProfileComponent />
-                <ProfileComponent />
-                <ProfileComponent />
+                <ProfileComponent :username="profiles.username" />
             </div>
             <button class="account__item__manageProfiles">GERENCIAR PERFIS</button>
         </main>
@@ -27,6 +23,17 @@
     export default {
         components: {
             ProfileComponent
+        },
+        computed: {
+            profiles() {
+                console.log(this.$store.state.profiles)
+                return this.$store.state.profile
+            }
+        },
+        beforeRouteEnter(to, from, next) {
+            if(from.name=='login')
+                next()
+            else next(vm => vm.$router.push('/login'))
         }
     }
 </script>
