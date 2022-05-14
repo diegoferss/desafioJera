@@ -58,7 +58,7 @@
           }
         }
         if(!checkIsEmpty || !checkEmail) {
-          console.log('err')
+          window.alert('Registro inválido')
         }
         else { 
           this.$http.post(`usuarios.json`, this.account)

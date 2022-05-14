@@ -26,7 +26,6 @@
         },
         computed: {
             profiles() {
-                console.log(this.$store.state.profiles)
                 return this.$store.state.profile
             }
         },

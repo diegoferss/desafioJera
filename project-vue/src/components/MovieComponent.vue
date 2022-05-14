@@ -67,7 +67,6 @@
       },
       watched() {
         let watchedMovies = this.$store.state.watchedMovies
-        console.log(watchedMovies)
         if(!watchedMovies.includes(this.values))
           this.$store.state.watchedMovies.push(this.values)
         let myMovies = this.$store.state.list
