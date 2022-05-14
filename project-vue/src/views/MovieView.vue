@@ -8,9 +8,6 @@
         <input class="movies__item__searchBar__search" :class="{'movies__item__searchBar__search--clicked': clicked}" type="text"
           @click="active()" @input="startingFetch" v-model="fetch">
       </button>
-      <div class="movies__item__user">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/55/Magnifying_glass_icon.svg/1200px-Magnifying_glass_icon.svg.png" alt="" class="movies__item__user__profile">
-      </div>
     </header>
 
     <main class="movies__item movies__item--gender">
