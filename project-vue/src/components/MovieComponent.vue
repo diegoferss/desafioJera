@@ -60,23 +60,27 @@
           }) 
           this.$store.state.list = actualList
         }
+        const user = this.$store.state.profile
+        user.moviesToWatch = this.$store.state.list
+        user.moviesWatched = this.$store.state.watchedMovies
+        this.$http.patch(`/usuarios/${user.idAccount}.json`, user)
       },
       watched() {
-        this.$store.state.watchedMovies.push(this.values)
-        let allMoviesList = this.$store.state.allMovies
+        let watchedMovies = this.$store.state.watchedMovies
+        console.log(watchedMovies)
+        if(!watchedMovies.includes(this.values))
+          this.$store.state.watchedMovies.push(this.values)
         let myMovies = this.$store.state.list
-        allMoviesList = allMoviesList.filter(el => {
-            if(el != this.values)
-              return true
-          }) 
-        this.$store.state.allMovies = allMoviesList
 
         myMovies = myMovies.filter(el => {
             if(el != this.values)
               return true
           }) 
         this.$store.state.list = myMovies
-
+        const user = this.$store.state.profile
+        user.moviesToWatch = this.$store.state.list
+        user.moviesWatched = this.$store.state.watchedMovies
+        this.$http.patch(`/usuarios/${user.idAccount}.json`, user)
       }
     }
   }

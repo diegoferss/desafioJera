@@ -49,6 +49,7 @@
           if(users[user].email == email && users[user].password == password) {
             accountExist = true
             accountLogged = users[user]
+            accountLogged.idAccount = user
             break
           }
         }

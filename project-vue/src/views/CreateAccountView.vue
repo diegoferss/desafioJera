@@ -62,6 +62,7 @@
         }
         else { 
           this.$http.post(`usuarios.json`, this.account)
+          this.$router.push('/login')
         }
       },
       checkFormIsEmpty() {

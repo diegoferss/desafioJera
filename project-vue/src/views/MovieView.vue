@@ -137,6 +137,23 @@ import Movie from '../components/MovieComponent.vue'
               })
             })
         })
+        this.$http.get(`usuarios/${this.$store.state.profile.idAccount}.json`)
+          .then(res => res.data)
+          .then(data => {
+            const moviesToWatch = data.moviesToWatch
+            const watchedMovies = data.moviesWatched
+            if(moviesToWatch != undefined)
+              this.$store.state.list = moviesToWatch
+            else this.$store.state.list = []
+            if(watchedMovies != undefined)
+              this.$store.state.watchedMovies = watchedMovies
+            else this.$store.state.watchedMovies = []
+          })
+    },
+    beforeRouteEnter(to, from, next) {
+        if(from.name=='profiles')
+            next()
+        else next(vm => vm.$router.push('/login'))
     }
   }
 </script>
